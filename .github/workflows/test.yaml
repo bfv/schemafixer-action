@@ -1,0 +1,19 @@
+name: Test action
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup schemafixer
+        uses: ./
+        with:
+          version: 'latest'
+
+      - name: Verify installation
+        run: schemafixer --version
