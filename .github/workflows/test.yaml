@@ -17,3 +17,9 @@ jobs:
 
       - name: Verify installation
         run: schemafixer --version
+
+      - name: test defaults
+        run: |
+          cd test
+          schemafixer apply testdb.df defaults.yaml 
+
