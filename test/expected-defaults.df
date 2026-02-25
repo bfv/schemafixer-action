@@ -1,0 +1,36 @@
+ADD TABLE "testtable"
+  AREA "DataArea"
+  DUMP-NAME "testtable"
+
+ADD FIELD "id" OF "testtable" AS int64 
+  FORMAT "->,>>>,>>9"
+  INITIAL "0"
+  LABEL "id"
+  POSITION 2
+  MAX-WIDTH 8
+  COLUMN-LABEL "id"
+  ORDER 10
+
+ADD FIELD "doc" OF "testtable" AS clob 
+  FORMAT "x(8)"
+  INITIAL ?
+  POSITION 3
+  LOB-AREA "LobArea"
+  LOB-BYTES 1048576
+  LOB-SIZE 1M
+  CLOB-CODEPAGE "iso8859-1"
+  CLOB-COLLATION "basic"
+  CLOB-TYPE 1
+  ORDER 20
+
+ADD INDEX "pk" ON "testtable" 
+  AREA "IndexArea"
+  UNIQUE
+  PRIMARY
+  INDEX-FIELD "id" ASCENDING 
+
+.
+PSC
+cpstream=UTF-8
+.
+0000000551

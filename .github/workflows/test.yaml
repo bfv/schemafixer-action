@@ -18,8 +18,19 @@ jobs:
       - name: Verify installation
         run: schemafixer --version
 
-      - name: test defaults
+      - name: test apply defaults
         run: |
           cd test
-          schemafixer apply testdb.df defaults.yaml 
+          schemafixer apply testdb.df defaults.yaml > actual-defaults.df
+          diff -u expected-defaults.df actual-defaults.df
+          cat actual-defaults.df
 
+      - name: test apply case1
+        run: |
+          cd test
+          schemafixer apply testdb.df case1.yaml 
+
+      - name: test diff case1 with defaults
+        run: |
+          cd test
+          schemafixer diff testdb.df actual-defaults.df
