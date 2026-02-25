@@ -1,0 +1,23 @@
+name: 'Setup Schemafixer'
+description: 'Download and install schemafixer'
+inputs:
+  version:
+    description: 'Version of schemafixer to install (e.g. v1.0.2), defaults to latest'
+    required: false
+    default: 'latest'
+
+runs:
+  using: composite
+  steps:
+    - name: Download schemafixer
+      shell: bash
+      run: |
+        VERSION=${{ inputs.version }}
+        if [ "$VERSION" = "latest" ]; then
+          VERSION=$(curl -sSf https://api.github.com/repos/bfv/schemafixer/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
+        fi
+        # strip de 'v' voor de bestandsnaam
+        VERSION_NO_V=${VERSION#v}
+        curl -sSfL https://github.com/bfv/schemafixer/releases/download/${VERSION}/schemafixer_${VERSION_NO_V}_linux_amd64.tar.gz | tar -xz
+        chmod +x schemafixer
+        sudo mv schemafixer /usr/local/bin/
