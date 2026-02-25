@@ -1,0 +1,7 @@
+schemafixer:
+  version: 1.0
+  defaults:
+    table: AltDataArea
+    index: AltIndexArea
+    lob: AltLobArea
+  tables: []
