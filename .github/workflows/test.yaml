@@ -30,7 +30,17 @@ jobs:
           cd test
           schemafixer apply testdb.df case1.yaml 
 
-      - name: test diff case1 with defaults
+      - name: test diff testdb.df with defaults
         run: |
           cd test
           schemafixer diff testdb.df actual-defaults.df
+
+      - name: test parse testdb.df against case1.yaml
+        run: |
+          cd test
+          schemafixer parse testdb.df case1.yaml
+
+      - name: test parse case1-alt
+        run: |
+          cd test
+          schemafixer parse actual-defaults.df case1-alt.yaml
